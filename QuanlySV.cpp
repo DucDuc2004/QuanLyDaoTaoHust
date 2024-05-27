@@ -183,6 +183,6 @@ int main() {
     hienThiThongTin(danhSachSinhVien);
     std::cout << std::endl;
     hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
- //datdeptrai
+
     return 0;
 }

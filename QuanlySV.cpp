@@ -65,7 +65,7 @@ void hienThiDanhSachHocPhan(const std::vector<HocPhan> &dsHocPhan) {
               << std::right << std::setw(20) << "So tin chi"
               << std::endl;
     std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
-
+//update location
     for (const auto &hp : dsHocPhan) {
         std::cout << std::setfill(' ')
                   << std::left << std::setw(15) << hp.maHocPhan

@@ -9,3 +9,4 @@ SSH1121, Kinh te chinh tri, 2
 SSH1131, Chu nghia xa hoi khoa hoc, 2
 SSH1141, Tu tuong Ho Chi Minh, 2
 SSH1151, Lich su Dang, 2
+ET2100, Nhap mon ky thuat dien tu vien thong, 2

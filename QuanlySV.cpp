@@ -58,22 +58,22 @@ void docHocPhanTuFile(const std::string &tenFile, std::vector<HocPhan> &dsHocPha
 }
 
 void hienThiDanhSachHocPhan(const std::vector<HocPhan> &dsHocPhan) {
-    std::cout << std::setw(60) << std::setfill('-') << "" << std::endl;
+    std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
     std::cout << std::setfill(' ')
-              << std::left << std::setw(15) << "Ma hoc phan"
-              << std::left << std::setw(30) << "Ten hoc phan"
-              << std::left << std::setw(10) << "So tin chi"
+              << std::left << std::setw(20) << "Ma hoc phan"
+              << std::left << std::setw(48) << "Ten hoc phan"
+              << std::right << std::setw(20) << "So tin chi"
               << std::endl;
-    std::cout << std::setw(60) << std::setfill('-') << "" << std::endl;
+    std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
 
     for (const auto &hp : dsHocPhan) {
         std::cout << std::setfill(' ')
                   << std::left << std::setw(15) << hp.maHocPhan
-                  << std::left << std::setw(30) << hp.tenHocPhan
-                  << std::left << std::setw(10) << hp.soTinChi
+                  << std::left << std::setw(55) << hp.tenHocPhan
+                  << std::right << std::setw(13) << hp.soTinChi
                   << std::endl;
     }
-    std::cout << std::setw(60) << std::setfill('-') << "" << std::endl;
+    std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
 }
 
 void dangKyHocPhan(const std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocPhanDaDangKy) {
@@ -96,7 +96,7 @@ void hienThiDanhSachHocPhanDaDangKy(const std::vector<HocPhan> &dsHocPhanDaDangK
     std::cout << std::setfill(' ')
               << std::left << std::setw(15) << "Ma hoc phan"
               << std::left << std::setw(30) << "Ten hoc phan"
-              << std::left << std::setw(10) << "So tin chi"
+              << std::left << std::setw(5) << "So tin chi"
               << std::endl;
     std::cout << std::setw(60) << std::setfill('-') << "" << std::endl;
 
@@ -104,7 +104,7 @@ void hienThiDanhSachHocPhanDaDangKy(const std::vector<HocPhan> &dsHocPhanDaDangK
         std::cout << std::setfill(' ')
                   << std::left << std::setw(15) << hp.maHocPhan
                   << std::left << std::setw(30) << hp.tenHocPhan
-                  << std::left << std::setw(10) << hp.soTinChi
+                  << std::left << std::setw(5) << hp.soTinChi
                   << std::endl;
     }
     std::cout << std::setw(60) << std::setfill('-') << "" << std::endl;

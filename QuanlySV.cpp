@@ -245,7 +245,7 @@ int main() {
         default:
              std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
         }
-    if (luaChon != '4' ) {
+    if (luaChon != 4 ) {
         chuongTrinhDangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
     }
 

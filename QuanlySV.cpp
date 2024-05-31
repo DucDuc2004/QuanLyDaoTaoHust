@@ -176,50 +176,9 @@ void hienThiThongTinSinhVien(const vector<SinhVien>& danhSachSV) {
         cout << "Ten: " << sv.ten << ", Ma SV: " << sv.maSV << ", He: " << sv.he << endl;
     }
 }
-
-int main() {
-    vector<SinhVien> danhSachSinhVien;
-    std::vector<HocPhan> dsHocPhan;
-    std::vector<HocPhan> dsHocPhanDaDangKy;
-
-    docHocPhanTuFile("hocphan.txt", dsHocPhan); 
+void chuongTrinhDangKyHocPhan(vector<HocPhan>&dsHocPhan,vector<HocPhan>&dsHocPhanDaDangKy){
     int chon;
-    char luaChon;
-
     do {
-        std::cout << "Chon phan he dang ky (A: Dai tra, B: Elitech, C: SIE, Q: Thoat): ";
-        std::cin >> luaChon;
-
-        if (luaChon == 'A' || luaChon == 'a') {
-            std::string ten, maSV;
-            std::cout << "Nhap ten: ";
-            std::cin >> ten;
-            std::cout << "Nhap ma sinh vien: ";
-            std::cin >> maSV;
-            danhSachSinhVien.push_back(SinhVien(ten, maSV, "Dai tra"));
-
-        } else if (luaChon == 'B' || luaChon == 'b') {
-            std::string ten, maSV;
-            std::cout << "Nhap ten: ";
-            std::cin >> ten;
-            std::cout << "Nhap ma sinh vien: ";
-            std::cin >> maSV;
-            danhSachSinhVien.push_back(SinhVien(ten, maSV, "Elitech"));
-
-        } else if (luaChon == 'C' || luaChon == 'c') {
-            std::string ten, maSV;
-            std::cout << "Nhap ten: ";
-            std::cin >> ten;
-            std::cout << "Nhap ma sinh vien: ";
-            std::cin >> maSV;
-            danhSachSinhVien.push_back(SinhVien(ten, maSV, "SIE"));
-        } else if (luaChon == 'Q' || luaChon == 'q') {
-            break;
-        } else {
-            std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
-        }
-
-        do {
             std::cout << "\n----- Menu -----\n";
             std::cout << "1. Hien thi danh sach hoc phan\n";
             std::cout << "2. Dang ky hoc phan\n";
@@ -249,8 +208,46 @@ int main() {
                     std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
             }
         } while (chon != 5);
-        
-    } while (luaChon != 'Q' && luaChon != 'q');
+}
+
+
+int main() {
+    vector<SinhVien> danhSachSinhVien;
+    std::vector<HocPhan> dsHocPhan;
+    std::vector<HocPhan> dsHocPhanDaDangKy;
+
+    docHocPhanTuFile("hocphan.txt", dsHocPhan); 
+    int chon;
+    int luaChon;
+    std::string ten, maSV;
+    std::cout << "Nhap ten: ";
+    std::cin >> ten;
+    std::cout << "Nhap ma sinh vien: ";
+    std::cin >> maSV;
+    std::cout << "Chon phan he dang ky (1: Dai tra, 2: Elitech, 3: SIE, 4: Thoat): ";
+    std::cin >> luaChon;
+
+    switch(luaChon) {
+
+        case 1:
+            danhSachSinhVien.push_back(SinhVien(ten, maSV, "Dai tra"));
+            break;
+
+        case 2:
+            danhSachSinhVien.push_back(SinhVien(ten, maSV, "Elitech"));
+            break;
+
+        case 3:
+            danhSachSinhVien.push_back(SinhVien(ten, maSV, "SIE"));
+            break;
+        case 4:
+            break;
+        default:
+             std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
+        }
+    if (luaChon != '4' ) {
+        chuongTrinhDangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
+    }
 
     std::cout << std::endl;
     hienThiThongTinSinhVien(danhSachSinhVien);

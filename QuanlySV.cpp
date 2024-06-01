@@ -219,6 +219,7 @@ int main() {
     docHocPhanTuFile("hocphan.txt", dsHocPhan); 
     int chon;
     int luaChon;
+    bool hopLe = false;
     std::string ten, maSV;
     std::cout << "Nhap ten: ";
     std::cin >> ten;
@@ -231,21 +232,24 @@ int main() {
 
         case 1:
             danhSachSinhVien.push_back(SinhVien(ten, maSV, "Dai tra"));
+            hopLe = true;
             break;
 
         case 2:
             danhSachSinhVien.push_back(SinhVien(ten, maSV, "Elitech"));
+            hopLe = true;
             break;
 
         case 3:
             danhSachSinhVien.push_back(SinhVien(ten, maSV, "SIE"));
+            hopLe = true;
             break;
         case 4:
             break;
         default:
              std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
         }
-    if (luaChon != 4 ) {
+    if (hopLe) {
         chuongTrinhDangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
     }
 

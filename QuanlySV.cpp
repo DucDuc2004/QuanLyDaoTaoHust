@@ -225,7 +225,8 @@ int main() {
     std::cin >> ten;
     std::cout << "Nhap ma sinh vien: ";
     std::cin >> maSV;
-    std::cout << "Chon phan he dang ky (1: Dai tra, 2: Elitech, 3: SIE, 4: Thoat): ";
+    while (!hopLe) {
+    std::cout << "Chon phan he dang ky (1: Dai tra, 2: Elitech, 3: SIE): ";
     std::cin >> luaChon;
 
     switch(luaChon) {
@@ -244,11 +245,10 @@ int main() {
             danhSachSinhVien.push_back(SinhVien(ten, maSV, "SIE"));
             hopLe = true;
             break;
-        case 4:
-            break;
         default:
              std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
         }
+    }
     if (hopLe) {
         chuongTrinhDangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
     }

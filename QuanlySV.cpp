@@ -222,7 +222,7 @@ int main() {
     bool hopLe = false;
     std::string ten, maSV;
     std::cout << "Nhap ten: ";
-    std::cin >> ten;
+    std::getline(std::cin >> std::ws, ten);
     std::cout << "Nhap ma sinh vien: ";
     std::cin >> maSV;
     while (!hopLe) {

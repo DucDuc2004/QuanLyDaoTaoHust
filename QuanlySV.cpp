@@ -90,13 +90,19 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
     std::cout << "Nhap ma hoc phan de dang ky: ";
     std::cin >> maHocPhan;
 
+    for (const auto &hpDaDangKy : dsHocPhanDaDangKy) {
+        if (hpDaDangKy.maHocPhan == maHocPhan) {
+            std::cout << "Hoc phan " << maHocPhan << " da duoc dang ky truoc do." << std::endl;
+            return;
+        }
+    }
+
     std::cout << "Chon ngay hoc (0: T2, 1: T3, 2: T4, 3: T5, 4: T6): ";
     std::cin >> ngay;
 
     std::cout << "Chon ca hoc (1-6): ";
     std::cin >> ca;
 
-    // Kiểm tra xem đã đăng ký vào ca này của ngày được chọn chưa
     for (const auto &hpDaDangKy : dsHocPhanDaDangKy) {
         if (hpDaDangKy.lichHoc[ngay][ca - 1]) {
             std::cout << "Ca " << ca << " ngay " << ngay + 2 << " da duoc dang ky cho hoc phan khac." << std::endl;
@@ -119,24 +125,19 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
 
 void xoaHocPhan(std::vector<HocPhan> &dsHocPhanDaDangKy) {
     std::string maHocPhan;
-    int ngay, ca;
 
     std::cout << "Nhap ma hoc phan de huy dang ky: ";
     std::cin >> maHocPhan;
-    std::cout << "Chon ngay hoc da dang ky (0: T2, 1: T3, 2: T4, 3: T5, 4: T6): ";
-    std::cin >> ngay;
-    std::cout << "Chon ca hoc da dang ky (1-6): ";
-    std::cin >> ca;
 
     for (auto it = dsHocPhanDaDangKy.begin(); it != dsHocPhanDaDangKy.end(); ++it) {
-        if (it->maHocPhan == maHocPhan && it->lichHoc[ngay][ca - 1]) {
-            it->lichHoc[ngay][ca - 1] = false; 
-            std::cout << "Huy dang ky thanh cong cho hoc phan: " << it->tenHocPhan << " tai ca " << ca << " ngay " << ngay + 2 << std::endl;
+        if (it->maHocPhan == maHocPhan) {
+            it->lichHoc[it->ngay][it->ca - 1] = false; 
+            std::cout << "Huy dang ky thanh cong cho hoc phan: " << it->tenHocPhan << std::endl;
             dsHocPhanDaDangKy.erase(it); 
             return;
         }
     }
-    std::cout << "Khong tim thay dang ky hoc phan voi ma " << maHocPhan << " tai ca " << ca << " ngay " << ngay + 2 << " khong hop le." << std::endl;
+    std::cout << "Khong tim thay hoc phan voi ma " << maHocPhan << "." << std::endl;
 }
 
 void hienThiDanhSachHocPhanDaDangKy(const std::vector<HocPhan> &dsHocPhanDaDangKy) {
@@ -176,40 +177,40 @@ void hienThiThongTinSinhVien(const vector<SinhVien>& danhSachSV) {
         cout << "Ten: " << sv.ten << ", Ma SV: " << sv.maSV << ", He: " << sv.he << endl;
     }
 }
-void chuongTrinhDangKyHocPhan(vector<HocPhan>&dsHocPhan,vector<HocPhan>&dsHocPhanDaDangKy){
+
+void chuongTrinhDangKyHocPhan(vector<HocPhan>& dsHocPhan, vector<HocPhan>& dsHocPhanDaDangKy) {
     int chon;
     do {
-            std::cout << "\n----- Menu -----\n";
-            std::cout << "1. Hien thi danh sach hoc phan\n";
-            std::cout << "2. Dang ky hoc phan\n";
-            std::cout << "3. Hien thi danh sach hoc phan da dang ky\n";
-            std::cout << "4. Xoa hoc phan\n";
-            std::cout << "5. Thoat\n";
-            std::cout << "Nhap lua chon cua ban: ";
-            std::cin >> chon;
+        std::cout << "\n----- Menu -----\n";
+        std::cout << "1. Hien thi danh sach hoc phan\n";
+        std::cout << "2. Dang ky hoc phan\n";
+        std::cout << "3. Hien thi danh sach hoc phan da dang ky\n";
+        std::cout << "4. Xoa hoc phan\n";
+        std::cout << "5. Thoat\n";
+        std::cout << "Nhap lua chon cua ban: ";
+        std::cin >> chon;
 
-            switch (chon) {
-                case 1:
-                    hienThiDanhSachHocPhan(dsHocPhan);
-                    break;
-                case 2:
-                    dangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
-                    break;
-                case 3:
-                    hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
-                    break;
-                case 4:
-                    xoaHocPhan(dsHocPhanDaDangKy);
-                    break;
-                case 5:
-                    std::cout << "Thoat chuong trinh.\n";
-                    break;
-                default:
-                    std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
-            }
-        } while (chon != 5);
+        switch (chon) {
+            case 1:
+                hienThiDanhSachHocPhan(dsHocPhan);
+                break;
+            case 2:
+                dangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
+                break;
+            case 3:
+                hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
+                break;
+            case 4:
+                xoaHocPhan(dsHocPhanDaDangKy);
+                break;
+            case 5:
+                std::cout << "Thoat chuong trinh.\n";
+                break;
+            default:
+                std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
+        }
+    } while (chon != 5);
 }
-
 
 int main() {
     vector<SinhVien> danhSachSinhVien;
@@ -217,38 +218,37 @@ int main() {
     std::vector<HocPhan> dsHocPhanDaDangKy;
 
     docHocPhanTuFile("hocphan.txt", dsHocPhan); 
-    int chon;
     int luaChon;
     bool hopLe = false;
     std::string ten, maSV;
+
     std::cout << "Nhap ten: ";
     std::getline(std::cin >> std::ws, ten);
     std::cout << "Nhap ma sinh vien: ";
     std::cin >> maSV;
+
     while (!hopLe) {
-    std::cout << "Chon phan he dang ky (1: Dai tra, 2: Elitech, 3: SIE): ";
-    std::cin >> luaChon;
+        std::cout << "Chon phan he dang ky (1: Dai tra, 2: Elitech, 3: SIE): ";
+        std::cin >> luaChon;
 
-    switch(luaChon) {
-
-        case 1:
-            danhSachSinhVien.push_back(SinhVien(ten, maSV, "Dai tra"));
-            hopLe = true;
-            break;
-
-        case 2:
-            danhSachSinhVien.push_back(SinhVien(ten, maSV, "Elitech"));
-            hopLe = true;
-            break;
-
-        case 3:
-            danhSachSinhVien.push_back(SinhVien(ten, maSV, "SIE"));
-            hopLe = true;
-            break;
-        default:
-             std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
+        switch(luaChon) {
+            case 1:
+                danhSachSinhVien.push_back(SinhVien(ten, maSV, "Dai tra"));
+                hopLe = true;
+                break;
+            case 2:
+                danhSachSinhVien.push_back(SinhVien(ten, maSV, "Elitech"));
+                hopLe = true;
+                break;
+            case 3:
+                danhSachSinhVien.push_back(SinhVien(ten, maSV, "SIE"));
+                hopLe = true;
+                break;
+            default:
+                std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
         }
     }
+
     if (hopLe) {
         chuongTrinhDangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
     }

@@ -83,9 +83,18 @@ void hienThiDanhSachHocPhan(const std::vector<HocPhan> &dsHocPhan) {
     std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
 }
 
+int tinhTongTinChi(const std::vector<HocPhan> &dsHocPhanDaDangKy) {
+    int tongTinChi = 0;
+    for (const auto &hp : dsHocPhanDaDangKy) {
+        tongTinChi += hp.soTinChi;
+    }
+    return tongTinChi;
+}
+
 void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocPhanDaDangKy) {
     std::string maHocPhan;
     int ngay, ca;
+    int tongSoTinChiDaDangKy = 0;
 
     std::cout << "Nhap ma hoc phan de dang ky: ";
     std::cin >> maHocPhan;
@@ -95,6 +104,22 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
             std::cout << "Hoc phan " << maHocPhan << " da duoc dang ky truoc do." << std::endl;
             return;
         }
+    }
+    
+    int tongTinChi = tinhTongTinChi(dsHocPhanDaDangKy);
+    
+    HocPhan *tinchidangky = 0;
+    for (auto &hp : dsHocPhan) {
+        if (hp.maHocPhan == maHocPhan) {
+            tinchidangky = &hp;
+            break;
+        }
+    }
+
+    if (tongTinChi + tinchidangky -> soTinChi > 28) 
+    {
+        std::cout << "Vuot qua so tin chi dang ky (28 tin chi). Vui long dang ky lai." << std::endl;
+        return;
     }
 
     std::cout << "Chon ngay hoc (2: T2, 3: T3, 4: T4, 5: T5, 6: T6): ";
@@ -117,10 +142,14 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
             hp.ca = ca;
             dsHocPhanDaDangKy.push_back(hp);
             std::cout << "Dang ky thanh cong hoc phan: " << hp.tenHocPhan << " cho ca " << ca << " ngay thu " << ngay << std::endl;
+            tongTinChi = tinhTongTinChi(dsHocPhanDaDangKy);
+            std::cout << "Tong so tin chi da dang ky hien tai: " << tongTinChi << std::endl;
             return;
         }
     }
+    
     std::cout << "Khong tim thay hoc phan voi ma " << maHocPhan << " hoac ca " << ca << " da duoc dang ky." << std::endl;
+
 }
 
 void xoaHocPhan(std::vector<HocPhan> &dsHocPhanDaDangKy) {
@@ -255,6 +284,7 @@ int main() {
 
     std::cout << std::endl;
     hienThiThongTinSinhVien(danhSachSinhVien);
+    
     std::cout << std::endl;
     hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
 

@@ -97,7 +97,7 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
         }
     }
 
-    std::cout << "Chon ngay hoc (0: T2, 1: T3, 2: T4, 3: T5, 4: T6): ";
+    std::cout << "Chon ngay hoc (2: T2, 3: T3, 4: T4, 5: T5, 6: T6): ";
     std::cin >> ngay;
 
     std::cout << "Chon ca hoc (1-6): ";
@@ -105,7 +105,7 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
 
     for (const auto &hpDaDangKy : dsHocPhanDaDangKy) {
         if (hpDaDangKy.lichHoc[ngay][ca - 1]) {
-            std::cout << "Ca " << ca << " ngay " << ngay + 2 << " da duoc dang ky cho hoc phan khac." << std::endl;
+            std::cout << "Ca " << ca << " ngay " << ngay << " da duoc dang ky cho hoc phan khac." << std::endl;
             return;
         }
     }
@@ -116,7 +116,7 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
             hp.ngay = ngay;
             hp.ca = ca;
             dsHocPhanDaDangKy.push_back(hp);
-            std::cout << "Dang ky thanh cong hoc phan: " << hp.tenHocPhan << " cho ca " << ca << " ngay thu " << ngay + 2 << std::endl;
+            std::cout << "Dang ky thanh cong hoc phan: " << hp.tenHocPhan << " cho ca " << ca << " ngay thu " << ngay << std::endl;
             return;
         }
     }
@@ -146,7 +146,7 @@ void hienThiDanhSachHocPhanDaDangKy(const std::vector<HocPhan> &dsHocPhanDaDangK
         return;
     }
 
-    const char* thu[] = {"Thu 2", "Thu 3", "Thu 4", "Thu 5", "Thu 6"};
+    const char* thu[] = {"", "", "Thu 2", "Thu 3", "Thu 4", "Thu 5", "Thu 6"};
 
     std::cout << "Danh sach cac hoc phan da dang ky:" << std::endl;
     std::cout << std::setw(150) << std::setfill('-') << "" << std::endl;

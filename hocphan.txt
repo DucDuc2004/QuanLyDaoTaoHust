@@ -9,4 +9,34 @@ SSH1121, Kinh te chinh tri, 2
 SSH1131, Chu nghia xa hoi khoa hoc, 2
 SSH1141, Tu tuong Ho Chi Minh, 2
 SSH1151, Lich su Dang, 2
-ET2000, Ky thuat nhap mon dien tu vien thong, 2
+ET2000, Nhap mon ky thuat dien tu vien thong, 2
+ET4900, Do an tot nghiep cu nhan, 6
+ET3180, Thong tin vo tuyen, 3
+ET3250, Thong tin so, 3
+ET3311, An toan thong tin, 3
+ET4032, Thiet ke IC tuong tu, 2
+ET4060, Phan tich va thiet ke huong doi tuong, 3
+ET4245, Tri tue nhan tao va ung dung, 3
+ET4340, Thiet ke VLSI, 3
+ET4435, Lap trinh song song, 2
+ET2021, Thuc tap co ban, 2
+ET2022, Technical Writing and Presentation, 3
+ET2031, Ky thuat lap trinh C/C++, 2
+ET2042, Linh kien dien tu, 2
+ET2050, Ly thuyet mach, 3
+ET2060, Tin hieu va he thong, 3
+ET2072, Ly thuyet thong tin, 2
+ET2082, Do luong dien tu, 3
+ET2100, Cau truc du lieu va giai thuat, 2
+ET3220, Dien tu so, 3
+ET3231, Dien tu tuong tu, 3
+ET3291, Do an thiet ke phan mem nhung, 2
+ET3300, Ky thuat vi xu ly, 3
+ET4012, Do an thiet ke thiet bi nhung, 2
+ET4231, Mang may tinh va IoT, 3
+ET4260, Da phuong tien, 2
+ET4292, He dieu hanh nhung, 3
+ET4321, Nguyen ly sieu cao tan, 3
+ET4361, He thong nhung va thiet ke giao tiep nhung, 3
+
+

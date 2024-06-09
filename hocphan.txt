@@ -4,11 +4,14 @@ MI1131, Giai tich III, 3
 MI1141, Dai so, 4
 MI2020, Xac suat thong ke, 3
 MI2010, Phuong phap tinh, 2
+PH1111, Vat ly dai cuong I, 2
+PH1121, Vat ly dai cuong II, 2
+EM1170, Phap luat dai cuong, 2
 SSH1111, Triet hoc Mac - Lenin, 3
 SSH1121, Kinh te chinh tri, 2
 SSH1131, Chu nghia xa hoi khoa hoc, 2
-SSH1141, Tu tuong Ho Chi Minh, 2
-SSH1151, Lich su Dang, 2
+SSH1141, Lich su Dang, 2
+SSH1151, Tu tuong Ho Chi Minh, 2
 ET2000, Nhap mon ky thuat dien tu vien thong, 2
 ET4900, Do an tot nghiep cu nhan, 6
 ET3180, Thong tin vo tuyen, 3
@@ -38,5 +41,69 @@ ET4260, Da phuong tien, 2
 ET4292, He dieu hanh nhung, 3
 ET4321, Nguyen ly sieu cao tan, 3
 ET4361, He thong nhung va thiet ke giao tiep nhung, 3
+ET3270, Thuc tap ky thuat, 2
+ET3262, Tu duy cong nghe va thiet ke my thuat, 2
+MIL1210, Duong loi quoc phong va an ninh cua Dang Cong san Viet Nam, 0 
+MIL1220, Cong tac quoc phong va an ninh, 0 
+MIL1230, Quan su chung, 0
+MIL1240, Ky thuat chien dau bo binh va chien thuat, 0
+PE1015, The duc tay khong, 0
+PE2261, Karatedo, 
+PE2101, Bong chuyen 1, 0
+PE2151, Erobic, 0
+PE2201, Bong da 1, 0
+PE2251, Taekwondo 1, 0
+PE2301, Bong ro 1 ,0
+PE2401, Bong ban 1, 0
+PE2501, Cau long 1, 0
+PE2601, Chay, 0
+PE2701, Nhay cao, 0
+PE2801, Nhay xa, 0
+PE2901, Xa kep, xa lech, 0
+PE3101, Chuyen sau Bong chuyen 1, 0
+PE3102, Chuyen sau Bong chuyen 2, 0
+PE3103, Chuyen sau Bong chuyen 3
+PE3201, Chuyen sau Bong da 1, 0
+PE3202, Chuyen sau Bong da 2, 0
+PE3203, Chuyen sau Bong da 3, 0
+PE3301, Chuyen sau Bong ro 1, 0
+PE3302, Chuyen sau Bong ro 2, 0
+PE3303, Chuyen sau Bong ro 3, 0
+PE2102, Bong chuyen 2, 0
+PE2202, Bong da 2, 0
+PE2252, Taekwondo 2, 0
+PE2302, Bong ro 2, 0
+PE2402, Bong ban 2, 0
+PE2502, Cau long 2, 0
+PE3104, Chuyen sau Bong chuyen 4, 0
+PE3204, Chuyen sau Bong da 4, 0
+PE3304, Chuyen sau Bong ro 4, 0
+PE2103, Bong chuyen 3, 0
+PE2203, Bong da 3, 0
+PE2253, Taekwondo 3, 0
+PE2303, Bong ro 3, 0
+PE2403, Bong ban 3, 0
+PE2503, Cau long 3, 0
+PE3105, Chuyen sau Bong chuyen 5, 0
+PE3205, Chuyen sau Bong da 5, 0
+PE3305, Chuyen sau Bong ro 5, 0
+PE1014, Ly luan TDTT, 0
+PE1024, Boi loi, 0
+IT1110, Tin hoc dai cuong, 4
+JP1111, Tieng Nhat 1, 0
+JP1121, Tieng Nhat 2, 0
+JP1134, Tieng Nhat 3, 0
+JP2113, Tieng Nhat 4, 0
+JP2123, Tieng Nhat 5, 4
+JP2124, Tieng Nhat 6, 4
+JP2125, Tieng Nhat 7, 3
+CH2021, Doi moi sang tao va khoi nghiep, 2
+ED3220, Ky nang mem, 2
+ED3280, Tam ly hoc ung dung, 2
+EM1010, Quan tri hoc dai cuong, 2
+EM1180, Van hoa kinh doanh va tinh than khoi nghiep, 2
+ME3123, Thiet ke my thuat cong nghiep, 2
+ME3124, Thiet ke quang ba san pham, 2
+
 
 

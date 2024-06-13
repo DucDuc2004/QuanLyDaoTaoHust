@@ -1,4 +1,4 @@
-MI1111, Giai tich I, 4
+MI1111, Giai tich I, 24
 MI1121, Giai tich II, 3
 MI1131, Giai tich III, 3
 MI1141, Dai so, 4
@@ -43,7 +43,7 @@ ET4321, Nguyen ly sieu cao tan, 3
 ET4361, He thong nhung va thiet ke giao tiep nhung, 3
 ET3270, Thuc tap ky thuat, 2
 ET3262, Tu duy cong nghe va thiet ke my thuat, 2
-MIL1210, Duong loi quoc phong va an ninh cua Dang Cong san Viet Nam, 0 
+MIL1210, Duong loi QP va an ninh cua DCS Viet Nam, 0 
 MIL1220, Cong tac quoc phong va an ninh, 0 
 MIL1230, Quan su chung, 0
 MIL1240, Ky thuat chien dau bo binh va chien thuat, 0

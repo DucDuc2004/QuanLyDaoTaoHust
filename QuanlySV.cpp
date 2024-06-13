@@ -5,6 +5,7 @@
 #include <string>
 #include <iomanip>
 
+
 using namespace std;
 
 class SinhVien {
@@ -16,74 +17,84 @@ public:
     SinhVien(string ten, string maSV, string he) : ten(ten), maSV(maSV), he(he) {}
 };
 
+class TaiKhoan {
+public:
+    string maSV;
+    string matKhau;
+    string ten;
+    string he;
+
+    TaiKhoan(string maSV, string matKhau, string ten, string he) : maSV(maSV), matKhau(matKhau), ten(ten), he(he) {}
+};
+
 struct HocPhan {
-    std::string maHocPhan;
-    std::string tenHocPhan;
+    string maHocPhan;
+    string tenHocPhan;
     int soTinChi;
-    int ngay; 
-    int ca; 
-    bool lichHoc[5][6]; 
+    int ngay;
+    int ca;
+    bool lichHoc[5][6];
 
     HocPhan() {
         ngay = -1;
         ca = -1;
         for (int i = 0; i < 5; ++i) {
             for (int j = 0; j < 6; ++j) {
-                lichHoc[i][j] = false; 
+                lichHoc[i][j] = false;
             }
         }
     }
 };
 
-void docHocPhanTuFile(const std::string &tenFile, std::vector<HocPhan> &dsHocPhan) {
-    std::ifstream file(tenFile);
-    if (!file.is_open()) {
-        std::cerr << "Khong the mo file " << tenFile << std::endl;
+void docHocPhanTuFile(const string &tenFile, vector<HocPhan> &dsHocPhan) {
+    ifstream file(tenFile);
+    /*if (!file.is_open()) {
+        //cerr << "Khong the mo file " << tenFile << endl;
         return;
-    }
+    }*/
 
-    std::string line;
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        std::string ma, ten, tinChiStr;
-        std::getline(ss, ma, ',');
-        std::getline(ss, ten, ',');
-        std::getline(ss, tinChiStr, ',');
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string ma, ten, tinChiStr;
+        getline(ss, ma, ',');
+        getline(ss, ten, ',');
+        getline(ss, tinChiStr, ',');
 
         try {
-            int soTinChi = std::stoi(tinChiStr);
+            int soTinChi = stoi(tinChiStr);
             HocPhan hp;
             hp.maHocPhan = ma;
             hp.tenHocPhan = ten;
             hp.soTinChi = soTinChi;
             dsHocPhan.push_back(hp);
-        } catch (const std::invalid_argument &e) {
-            std::cerr << "Loi: Khong the chuyen doi '" << tinChiStr << "' thanh so nguyen." << std::endl;
+        } catch (const invalid_argument &e) {
+            //cerr << "Loi: Khong the chuyen doi '" << tinChiStr << "' thanh so nguyen." << endl;
         }
     }
     file.close();
 }
 
-void hienThiDanhSachHocPhan(const std::vector<HocPhan> &dsHocPhan) {
-    std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
-    std::cout << std::setfill(' ')
-              << std::left << std::setw(20) << "Ma hoc phan"
-              << std::left << std::setw(48) << "Ten hoc phan"
-              << std::left << std::setw(20) << "So tin chi"
-              << std::endl;
-    std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
+void hienThiDanhSachHocPhan(const vector<HocPhan> &dsHocPhan) {
+    cout << setw(100) << setfill('-') << "" << endl;
+    cout << setfill(' ')
+         << left << setw(20) << "Ma hoc phan"
+         << left << setw(48) << "Ten hoc phan"
+         << left << setw(20) << "So tin chi"
+         << endl;
+    cout << setw(100) << setfill('-') << "" << endl;
 
     for (const auto &hp : dsHocPhan) {
-        std::cout << std::setfill(' ')
-                  << std::left << std::setw(20) << hp.maHocPhan
-                  << std::left << std::setw(48) << hp.tenHocPhan
-                  << std::left << std::setw(20) << hp.soTinChi
-                  << std::endl;
+        cout << setfill(' ')
+             << left << setw(20) << hp.maHocPhan
+             << left << setw(48) << hp.tenHocPhan
+             << left << setw(20) << hp.soTinChi
+             << endl;
     }
-    std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
+    cout << setw(100) << setfill('-') << "" << endl;
 }
 
-int tinhTongTinChi(const std::vector<HocPhan> &dsHocPhanDaDangKy) {
+int tinhTongTinChi(const vector<HocPhan> &dsHocPhanDaDangKy) {
     int tongTinChi = 0;
     for (const auto &hp : dsHocPhanDaDangKy) {
         tongTinChi += hp.soTinChi;
@@ -91,10 +102,17 @@ int tinhTongTinChi(const std::vector<HocPhan> &dsHocPhanDaDangKy) {
     return tongTinChi;
 }
 
-void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocPhanDaDangKy) {
+void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocPhanDaDangKy, const std::string &heSinhVien) {
     std::string maHocPhan;
     int ngay, ca;
-    int tongSoTinChiDaDangKy = 0;
+    int gioiHanTinChi;
+
+
+    if (heSinhVien == "Dai tra") {
+        gioiHanTinChi = 24;
+    } else {
+        gioiHanTinChi = 28;
+    }
 
     std::cout << "Nhap ma hoc phan de dang ky: ";
     std::cin >> maHocPhan;
@@ -105,9 +123,9 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
             return;
         }
     }
-    
+
     int tongTinChi = tinhTongTinChi(dsHocPhanDaDangKy);
-    
+
     HocPhan *tinchidangky = 0;
     for (auto &hp : dsHocPhan) {
         if (hp.maHocPhan == maHocPhan) {
@@ -116,9 +134,13 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
         }
     }
 
-    if (tongTinChi + tinchidangky -> soTinChi > 28) 
-    {
-        std::cout << "Vuot qua so tin chi dang ky (28 tin chi). Vui long dang ky lai." << std::endl;
+    if (tinchidangky == 0) {
+        std::cout << "Khong tim thay hoc phan voi ma " << maHocPhan << std::endl;
+        return;
+    }
+
+    if (tongTinChi + tinchidangky->soTinChi > gioiHanTinChi) {
+        std::cout << "Vuot qua so tin chi dang ky (" << gioiHanTinChi << " tin chi). Vui long dang ky lai." << std::endl;
         return;
     }
 
@@ -137,7 +159,7 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
 
     for (auto &hp : dsHocPhan) {
         if (hp.maHocPhan == maHocPhan && !hp.lichHoc[ngay][ca - 1]) {
-            hp.lichHoc[ngay][ca - 1] = true; 
+            hp.lichHoc[ngay][ca - 1] = true;
             hp.ngay = ngay;
             hp.ca = ca;
             dsHocPhanDaDangKy.push_back(hp);
@@ -147,146 +169,269 @@ void dangKyHocPhan(std::vector<HocPhan> &dsHocPhan, std::vector<HocPhan> &dsHocP
             return;
         }
     }
-    
-    std::cout << "Khong tim thay hoc phan voi ma " << maHocPhan << " hoac ca " << ca << " da duoc dang ky." << std::endl;
 
+    std::cout << "Khong tim thay hoc phan voi ma " << maHocPhan << " hoac ca " << ca << " da duoc dang ky." << std::endl;
 }
 
-void xoaHocPhan(std::vector<HocPhan> &dsHocPhanDaDangKy) {
-    std::string maHocPhan;
 
-    std::cout << "Nhap ma hoc phan de huy dang ky: ";
-    std::cin >> maHocPhan;
+void xoaHocPhan(vector<HocPhan> &dsHocPhanDaDangKy) {
+    string maHocPhan;
+
+    cout << "Nhap ma hoc phan de huy dang ky: ";
+    cin >> maHocPhan;
 
     for (auto it = dsHocPhanDaDangKy.begin(); it != dsHocPhanDaDangKy.end(); ++it) {
         if (it->maHocPhan == maHocPhan) {
-            it->lichHoc[it->ngay][it->ca - 1] = false; 
-            std::cout << "Huy dang ky thanh cong cho hoc phan: " << it->tenHocPhan << std::endl;
-            dsHocPhanDaDangKy.erase(it); 
+            it->lichHoc[it->ngay - 2][it->ca - 1] = false;
+            cout << "Huy dang ky thanh cong cho hoc phan: " << it->tenHocPhan << endl;
+            dsHocPhanDaDangKy.erase(it);
             return;
         }
     }
-    std::cout << "Khong tim thay hoc phan voi ma " << maHocPhan << "." << std::endl;
+    cout << "Khong tim thay hoc phan voi ma " << maHocPhan << "." << endl;
 }
 
-void hienThiDanhSachHocPhanDaDangKy(const std::vector<HocPhan> &dsHocPhanDaDangKy) {
+void hienThiDanhSachHocPhanDaDangKy(const vector<HocPhan> &dsHocPhanDaDangKy) {
     if (dsHocPhanDaDangKy.empty()) {
-        std::cout << "Chua co hoc phan nao duoc dang ky." << std::endl;
+        cout << "Chua co hoc phan nao duoc dang ky." << endl;
         return;
     }
 
     const char* thu[] = {"", "", "Thu 2", "Thu 3", "Thu 4", "Thu 5", "Thu 6"};
 
-    std::cout << "Danh sach cac hoc phan da dang ky:" << std::endl;
-    std::cout << std::setw(150) << std::setfill('-') << "" << std::endl;
-    std::cout << std::setfill(' ')
-              << std::left << std::setw(20) << "Ma hoc phan"
-              << std::left << std::setw(48) << "Ten hoc phan"
-              << std::left << std::setw(20) << "So tin chi"
-              << std::left << std::setw(20) << "Ngay hoc"
-              << std::left << std::setw(20) << "Ca hoc"
-              << std::endl;
-    std::cout << std::setw(150) << std::setfill('-') << "" << std::endl;
+    cout << "Danh sach cac hoc phan da dang ky:" << endl;
+    cout << setw(150) << setfill('-') << "" << endl;
+    cout << setfill(' ')
+         << left << setw(20) << "Ma hoc phan"
+         << left << setw(48) << "Ten hoc phan"
+         << left << setw(20) << "So tin chi"
+         << left << setw(20) << "Ngay hoc"
+         << left << setw(20) << "Ca hoc"
+         << endl;
+    cout << setw(150) << setfill('-') << "" << endl;
 
     for (const auto &hp : dsHocPhanDaDangKy) {
-        std::cout << std::setfill(' ')
-                  << std::left << std::setw(20) << hp.maHocPhan
-                  << std::left << std::setw(48) << hp.tenHocPhan
-                  << std::left << std::setw(20) << hp.soTinChi
-                  << std::left << std::setw(20) << thu[hp.ngay]
-                  << std::left << std::setw(20) << hp.ca
-                  << std::endl;
+        cout << setfill(' ')
+             << left << setw(20) << hp.maHocPhan
+             << left << setw(48) << hp.tenHocPhan
+             << left << setw(20) << hp.soTinChi
+             << left << setw(20) << thu[hp.ngay]
+             << left << setw(20) << hp.ca
+             << endl;
     }
-    std::cout << std::setw(150) << std::setfill('-') << "" << std::endl;
+    cout << setw(150) << setfill('-') << "" << endl;
 }
 
-void hienThiThongTinSinhVien(const vector<SinhVien>& danhSachSV) {
-    cout << "Danh sach sinh vien da dang ky hoc tap:\n";
-    for (const auto& sv : danhSachSV) {
-        cout << "Ten: " << sv.ten << ", Ma SV: " << sv.maSV << ", He: " << sv.he << endl;
-    }
-}
-
-void chuongTrinhDangKyHocPhan(vector<HocPhan>& dsHocPhan, vector<HocPhan>& dsHocPhanDaDangKy) {
-    int chon;
+void chuongTrinhDangKyHocPhan(vector<HocPhan> &dsHocPhan, vector<HocPhan> &dsHocPhanDaDangKy, const string &he) {
+    int luaChon;
     do {
-        std::cout << "\n----- Menu -----\n";
-        std::cout << "1. Hien thi danh sach hoc phan\n";
-        std::cout << "2. Dang ky hoc phan\n";
-        std::cout << "3. Hien thi danh sach hoc phan da dang ky\n";
-        std::cout << "4. Xoa hoc phan\n";
-        std::cout << "5. Thoat\n";
-        std::cout << "Nhap lua chon cua ban: ";
-        std::cin >> chon;
+        cout << "\n---------MENU---------\n" << endl;
+        cout << "Chuong trinh dang ky hoc phan:" << endl;
+        cout << "1. Hien thi danh sach hoc phan" << endl;
+        cout << "2. Dang ky hoc phan" << endl;
+        cout << "3. Huy dang ky hoc phan" << endl;
+        cout << "4. Hien thi danh sach hoc phan da dang ky" << endl;
+        cout << "5. Thoat" << endl;
+        cout << "Nhap lua chon: ";
+        cin >> luaChon;
 
-        switch (chon) {
+        switch (luaChon) {
             case 1:
                 hienThiDanhSachHocPhan(dsHocPhan);
                 break;
             case 2:
-                dangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
+                dangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy, he);
                 break;
             case 3:
-                hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
-                break;
-            case 4:
                 xoaHocPhan(dsHocPhanDaDangKy);
                 break;
+            case 4:
+                hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
+                break;
             case 5:
-                std::cout << "Thoat chuong trinh.\n";
+                cout << "Thoat chuong trinh dang ky hoc phan." << endl;
                 break;
             default:
-                std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
+                cout << "Lua chon khong hop le. Vui long chon lai." << endl;
+                break;
         }
-    } while (chon != 5);
+    } while (luaChon != 5);
+}
+
+void hienThiThongTinSinhVien(const vector<SinhVien> &danhSachSinhVien) {
+    cout << setw(100) << setfill('-') << "" << endl;
+    cout << setfill(' ')
+         << left << setw(20) << "Ma sinh vien"
+         << left << setw(48) << "Ho va ten"
+         << left << setw(20) << "He dao tao"
+         << endl;
+    cout << setw(100) << setfill('-') << "" << endl;
+
+    for (const auto &sv : danhSachSinhVien) {
+        cout << setfill(' ')
+             << left << setw(20) << sv.maSV
+             << left << setw(48) << sv.ten
+             << left << setw(20) << sv.he
+             << endl;
+    }
+    cout << setw(100) << setfill('-') << "" << endl;
+}
+
+void docTaiKhoanTuFile(const string &tenFile, vector<TaiKhoan> &danhSachTaiKhoan) {
+    ifstream file(tenFile);
+    /*if (!file.is_open()) {
+        //cerr << "Khong the mo file " << tenFile << endl;
+        return;
+    }*/
+
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string ma, mk, ten,he;
+        getline(ss, ma, ',');
+        getline(ss, mk, ',');
+        getline(ss, ten, ',');
+        getline(ss, he, ',');
+
+
+        danhSachTaiKhoan.push_back(TaiKhoan(ma, mk, ten,he));
+    }
+    file.close();
+}
+
+void ghiTaiKhoanVaoFile(const string &tenFile, const vector<TaiKhoan> &danhSachTaiKhoan) {
+    ofstream file(tenFile);
+    /*if (!file.is_open()) {
+        //cerr << "Khong the mo file " << tenFile << endl;
+        return;
+    }*/
+
+    for (const auto &tk : danhSachTaiKhoan) {
+        file << tk.maSV << "," << tk.matKhau << "," << tk.ten << "," << tk.he << endl;
+    }
+    file.close();
+}
+
+void dangKyTaiKhoan(vector<TaiKhoan> &danhSachTaiKhoan) {
+    string maSV, matKhau, ten, he;
+    int heLuaChon;
+
+    cout << "Nhap ma sinh vien: ";
+    cin >> maSV;
+    cout << "Nhap mat khau: ";
+    cin >> matKhau;
+    cin.ignore();
+    cout << "Nhap ho va ten: ";
+    getline(cin, ten);
+    do {
+        std::cout << "Chon he dao tao (1: Dai tra, 2: Elitech, 3: SIE): ";
+        std::cin >> heLuaChon;
+
+        switch (heLuaChon) {
+            case 1:
+                he = "Dai tra";
+                break;
+            case 2:
+                he = "Elitech";
+                break;
+            case 3:
+                he = "SIE";
+                break;
+            default:
+                std::cout << "Lua chon khong hop le. Vui long chon lai." << std::endl;
+        }
+    } while (heLuaChon < 1 || heLuaChon > 3);
+
+
+    for (const auto &tk : danhSachTaiKhoan) {
+        if (tk.maSV == maSV) {
+            cout << "Tai khoan da ton tai. Vui long dang nhap." << endl;
+            return;
+        }
+    }
+
+    danhSachTaiKhoan.push_back(TaiKhoan(maSV, matKhau, ten, he));
+    ghiTaiKhoanVaoFile("sinhvien.txt", danhSachTaiKhoan);
+    cout << "Dang ky tai khoan thanh cong!" << endl;
+}
+
+bool dangNhap(vector<TaiKhoan> &danhSachTaiKhoan, TaiKhoan &taiKhoanHienTai) {
+    string maSV, matKhau;
+
+    cout << "Nhap ma sinh vien: ";
+    cin >> maSV;
+    cout << "Nhap mat khau: ";
+    cin >> matKhau;
+
+    for (const auto &tk : danhSachTaiKhoan) {
+        if (tk.maSV == maSV && tk.matKhau == matKhau) {
+            taiKhoanHienTai = tk;
+            cout << "Dang nhap thanh cong!" << endl;
+            return true;
+        }
+    }
+
+    cout << "Sai ma sinh vien hoac mat khau. Vui long thu lai." << endl;
+    return false;
 }
 
 int main() {
     vector<SinhVien> danhSachSinhVien;
-    std::vector<HocPhan> dsHocPhan;
-    std::vector<HocPhan> dsHocPhanDaDangKy;
+    vector<HocPhan> dsHocPhan;
+    vector<HocPhan> dsHocPhanDaDangKy;
+    vector<TaiKhoan> danhSachTaiKhoan;
+    TaiKhoan taiKhoanHienTai("", "", "", "");
 
-    docHocPhanTuFile("hocphan.txt", dsHocPhan); 
+ 
+    docTaiKhoanTuFile("sinhvien.txt", danhSachTaiKhoan);
+
+
     int luaChon;
-    bool hopLe = false;
-    std::string ten, maSV;
+    bool dangNhapThanhCong = false;
 
-    std::cout << "Nhap ten: ";
-    std::getline(std::cin >> std::ws, ten);
-    std::cout << "Nhap ma sinh vien: ";
-    std::cin >> maSV;
+    cout << "\n                     QUAN LY DAO TAO HUST\n" << endl;
 
-    while (!hopLe) {
-        std::cout << "Chon phan he dang ky (1: Dai tra, 2: Elitech, 3: SIE): ";
-        std::cin >> luaChon;
+    do {
+        cout << "1. Dang ky tai khoan" << endl;
+        cout << "2. Dang nhap" << endl;
+        cout << "3. Thoat" << endl;
+        cout << "Nhap lua chon: ";
+        cin >> luaChon;
 
-        switch(luaChon) {
+        switch (luaChon) {
             case 1:
-                danhSachSinhVien.push_back(SinhVien(ten, maSV, "Dai tra"));
-                hopLe = true;
+                dangKyTaiKhoan(danhSachTaiKhoan);
                 break;
             case 2:
-                danhSachSinhVien.push_back(SinhVien(ten, maSV, "Elitech"));
-                hopLe = true;
+                dangNhapThanhCong = dangNhap(danhSachTaiKhoan, taiKhoanHienTai);
                 break;
             case 3:
-                danhSachSinhVien.push_back(SinhVien(ten, maSV, "SIE"));
-                hopLe = true;
-                break;
+                cout << "Thoat chuong trinh." << endl;
+                return 0;
             default:
-                std::cout << "Lua chon khong hop le. Vui long thu lai.\n";
+                cout << "Lua chon khong hop le. Vui long chon lai." << endl;
         }
-    }
+    } while (!dangNhapThanhCong);
 
-    if (hopLe) {
-        chuongTrinhDangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy);
-    }
+   
+    docHocPhanTuFile("hocphan.txt", dsHocPhan);
 
-    std::cout << std::endl;
-    hienThiThongTinSinhVien(danhSachSinhVien);
     
-    std::cout << std::endl;
+    danhSachSinhVien.emplace_back(taiKhoanHienTai.ten, taiKhoanHienTai.maSV, taiKhoanHienTai.he);
+
+    string a = taiKhoanHienTai.he;
+
+    chuongTrinhDangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy, a);
+
+    
+    hienThiThongTinSinhVien(danhSachSinhVien);
+
+    int tongTinChi = tinhTongTinChi(dsHocPhanDaDangKy);
+    
+    cout << endl;
     hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
 
+    cout << "Tong so tin chi da dang ky: " << tongTinChi << endl;
+    cout << endl;
     return 0;
 }

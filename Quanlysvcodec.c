@@ -120,7 +120,7 @@ void xoaHocPhan(HocPhan dsHocPhanDaDangKy[], int *soLuongHocPhanDaDangKy) {
 }
 
 void hienThiDanhSachHocPhanDaDangKy(HocPhan dsHocPhanDaDangKy[], int soLuongHocPhanDaDangKy) {
-    const char *thu[] = {"trong", "trong", "Thu 2", "Thu 3", "Thu 4", "Thu 5", "Thu 6"};
+    const char *thu[] = {"", "", "Thu 2", "Thu 3", "Thu 4", "Thu 5", "Thu 6"};
 
     if (soLuongHocPhanDaDangKy == 0) {
         printf("Chua co hoc phan nao duoc dang ky.\n");

@@ -1,4 +1,4 @@
-MI1111, Giai tich I, 24
+MI1111, Giai tich I, 4
 MI1121, Giai tich II, 3
 MI1131, Giai tich III, 3
 MI1141, Dai so, 4

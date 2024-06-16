@@ -229,8 +229,8 @@ void chuongTrinhDangKyHocPhan(vector<HocPhan> &dsHocPhan, vector<HocPhan> &dsHoc
         cout << "Chuong trinh dang ky hoc phan:" << endl;
         cout << "1. Hien thi danh sach hoc phan" << endl;
         cout << "2. Dang ky hoc phan" << endl;
-        cout << "3. Huy dang ky hoc phan" << endl;
-        cout << "4. Hien thi danh sach hoc phan da dang ky" << endl;
+        cout << "3. Hien thi danh sach hoc phan da dang ky" << endl;
+        cout << "4. Huy dang ky hoc phan" << endl;
         cout << "5. Thoat" << endl;
         cout << "Nhap lua chon: ";
         cin >> luaChon;
@@ -243,10 +243,10 @@ void chuongTrinhDangKyHocPhan(vector<HocPhan> &dsHocPhan, vector<HocPhan> &dsHoc
                 dangKyHocPhan(dsHocPhan, dsHocPhanDaDangKy, he);
                 break;
             case 3:
-                xoaHocPhan(dsHocPhanDaDangKy);
+                hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
                 break;
             case 4:
-                hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy);
+                xoaHocPhan(dsHocPhanDaDangKy);
                 break;
             case 5:
                 cout << "Thoat chuong trinh dang ky hoc phan." << endl;

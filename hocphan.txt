@@ -48,7 +48,7 @@ MIL1220, Cong tac quoc phong va an ninh, 0
 MIL1230, Quan su chung, 0
 MIL1240, Ky thuat chien dau bo binh va chien thuat, 0
 PE1015, The duc tay khong, 0
-PE2261, Karatedo, 
+PE2261, Karatedo, 0
 PE2101, Bong chuyen 1, 0
 PE2151, Erobic, 0
 PE2201, Bong da 1, 0
@@ -62,7 +62,7 @@ PE2801, Nhay xa, 0
 PE2901, Xa kep, xa lech, 0
 PE3101, Chuyen sau Bong chuyen 1, 0
 PE3102, Chuyen sau Bong chuyen 2, 0
-PE3103, Chuyen sau Bong chuyen 3
+PE3103, Chuyen sau Bong chuyen 3, 0
 PE3201, Chuyen sau Bong da 1, 0
 PE3202, Chuyen sau Bong da 2, 0
 PE3203, Chuyen sau Bong da 3, 0

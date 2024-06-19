@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #define MAX_STRING_LEN 256
-#define MAX_HOCPHAN 100
+#define MAX_HOCPHAN 106
 
 typedef struct {
     char ten[MAX_STRING_LEN];

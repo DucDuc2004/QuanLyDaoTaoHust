@@ -3,18 +3,18 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define MAX_STRING_LEN 256
+#define MAX_SV 256
 #define MAX_HOCPHAN 106
 
 typedef struct {
-    char ten[MAX_STRING_LEN];
-    char maSV[MAX_STRING_LEN];
-    char he[MAX_STRING_LEN];
+    char ten[MAX_SV];
+    char maSV[MAX_SV];
+    char he[MAX_SV];
 } SinhVien;
 
 typedef struct {
-    char maHocPhan[MAX_STRING_LEN];
-    char tenHocPhan[MAX_STRING_LEN];
+    char maHocPhan[MAX_SV];
+    char tenHocPhan[MAX_SV];
     int soTinChi;
     int ngay;
     int ca;
@@ -23,15 +23,11 @@ typedef struct {
 
 void docHocPhanTuFile(const char *tenFile, HocPhan dsHocPhan[], int *soLuongHocPhan) {
     FILE *file = fopen(tenFile, "r");
-    if (!file) {
-        fprintf(stderr, "Khong the mo file %s\n", tenFile);
-        return;
-    }
 
-    char line[MAX_STRING_LEN];
+    char line[MAX_SV];
     *soLuongHocPhan = 0;
     while (fgets(line, sizeof(line), file) && *soLuongHocPhan < MAX_HOCPHAN) {
-        char ma[MAX_STRING_LEN], ten[MAX_STRING_LEN], tinChiStr[MAX_STRING_LEN];
+        char ma[MAX_SV], ten[MAX_SV], tinChiStr[MAX_SV];
         sscanf(line, "%[^,],%[^,],%s", ma, ten, tinChiStr);
 
         int soTinChi = atoi(tinChiStr);
@@ -59,12 +55,22 @@ void hienThiDanhSachHocPhan(HocPhan dsHocPhan[], int soLuongHocPhan) {
     }
 }
 
-void dangKyHocPhan(HocPhan dsHocPhan[], int soLuongHocPhan, HocPhan dsHocPhanDaDangKy[], int *soLuongHocPhanDaDangKy) {
-    char maHocPhan[MAX_STRING_LEN];
+int tinhTongTinChi(HocPhan dsHocPhanDaDangKy[], int soLuongHocPhanDaDangKy) {
+    int tongTinChi = 0;
+    for (int i = 0; i < soLuongHocPhanDaDangKy; ++i) {
+        tongTinChi += dsHocPhanDaDangKy[i].soTinChi;
+    }
+    return tongTinChi;
+}
+
+void dangKyHocPhan(HocPhan dsHocPhan[], int soLuongHocPhan, HocPhan dsHocPhanDaDangKy[], int *soLuongHocPhanDaDangKy, int gioiHanTinChi) {
+    char maHocPhan[MAX_SV];
     int ngay, ca;
 
     printf("Nhap ma hoc phan de dang ky: ");
     scanf("%s", maHocPhan);
+
+    int tongTinChiHienTai = tinhTongTinChi(dsHocPhanDaDangKy, *soLuongHocPhanDaDangKy);
 
     for (int i = 0; i < *soLuongHocPhanDaDangKy; ++i) {
         if (strcmp(dsHocPhanDaDangKy[i].maHocPhan, maHocPhan) == 0) {
@@ -73,35 +79,41 @@ void dangKyHocPhan(HocPhan dsHocPhan[], int soLuongHocPhan, HocPhan dsHocPhanDaD
         }
     }
 
-    printf("Chon ngay hoc (2: T2, 3: T3, 4: T4, 5: T5, 6: T6): ");
-    scanf("%d", &ngay);
-
-    printf("Chon ca hoc (1-6): ");
-    scanf("%d", &ca);
-
-    for (int i = 0; i < *soLuongHocPhanDaDangKy; ++i) {
-        if (dsHocPhanDaDangKy[i].lichHoc[ngay][ca - 1]) {
-            printf("Ca %d ngay %d da duoc dang ky cho hoc phan khac.\n", ca, ngay);
-            return;
-        }
-    }
-
     for (int i = 0; i < soLuongHocPhan; ++i) {
-        if (strcmp(dsHocPhan[i].maHocPhan, maHocPhan) == 0 && !dsHocPhan[i].lichHoc[ngay][ca - 1]) {
-            dsHocPhan[i].lichHoc[ngay][ca - 1] = true;
-            dsHocPhan[i].ngay = ngay;
-            dsHocPhan[i].ca = ca;
-            dsHocPhanDaDangKy[*soLuongHocPhanDaDangKy] = dsHocPhan[i];
-            (*soLuongHocPhanDaDangKy)++;
-            printf("Dang ky thanh cong hoc phan: %s cho ca %d ngay thu %d\n", dsHocPhan[i].tenHocPhan, ca, ngay);
-            return;
+        if (strcmp(dsHocPhan[i].maHocPhan, maHocPhan) == 0) {
+            if (tongTinChiHienTai + dsHocPhan[i].soTinChi > gioiHanTinChi) {
+                printf("Khong the dang ky vi vuot qua gioi han tin chi (%d).\n", gioiHanTinChi);
+                return;
+            }
+
+            printf("Chon ngay hoc (2: T2, 3: T3, 4: T4, 5: T5, 6: T6): ");
+            scanf("%d", &ngay);
+
+            printf("Chon ca hoc (1-6): ");
+            scanf("%d", &ca);
+
+            for (int j = 0; j < *soLuongHocPhanDaDangKy; ++j) {
+                if (dsHocPhanDaDangKy[j].lichHoc[ngay][ca - 1]) {
+                    printf("Ca %d ngay %d da duoc dang ky cho hoc phan khac.\n", ca, ngay);
+                    return;
+                }
+            }
+
+            if (!dsHocPhan[i].lichHoc[ngay][ca - 1]) {
+                dsHocPhan[i].lichHoc[ngay][ca - 1] = true;
+                dsHocPhan[i].ngay = ngay;
+                dsHocPhan[i].ca = ca;
+                dsHocPhanDaDangKy[*soLuongHocPhanDaDangKy] = dsHocPhan[i];
+                (*soLuongHocPhanDaDangKy)++;
+                printf("Dang ky thanh cong hoc phan: %s cho ca %d ngay thu %d\n", dsHocPhan[i].tenHocPhan, ca, ngay);
+                return;
+            }
         }
     }
     printf("Khong tim thay hoc phan voi ma %s hoac ca %d da duoc dang ky.\n", maHocPhan, ca);
 }
-
 void xoaHocPhan(HocPhan dsHocPhanDaDangKy[], int *soLuongHocPhanDaDangKy) {
-    char maHocPhan[MAX_STRING_LEN];
+    char maHocPhan[MAX_SV];
 
     printf("Nhap ma hoc phan de huy dang ky: ");
     scanf("%s", maHocPhan);
@@ -142,7 +154,7 @@ void hienThiThongTinSinhVien(SinhVien danhSachSV[], int soLuongSV) {
     }
 }
 
-void chuongTrinhDangKyHocPhan(HocPhan dsHocPhan[], int soLuongHocPhan, HocPhan dsHocPhanDaDangKy[], int *soLuongHocPhanDaDangKy) {
+void chuongTrinhDangKyHocPhan(HocPhan dsHocPhan[], int soLuongHocPhan, HocPhan dsHocPhanDaDangKy[], int *soLuongHocPhanDaDangKy, int gioiHanTinChi) {
     int chon;
     do {
         printf("\n----- Menu -----\n");
@@ -159,7 +171,7 @@ void chuongTrinhDangKyHocPhan(HocPhan dsHocPhan[], int soLuongHocPhan, HocPhan d
                 hienThiDanhSachHocPhan(dsHocPhan, soLuongHocPhan);
                 break;
             case 2:
-                dangKyHocPhan(dsHocPhan, soLuongHocPhan, dsHocPhanDaDangKy, soLuongHocPhanDaDangKy);
+                dangKyHocPhan(dsHocPhan, soLuongHocPhan, dsHocPhanDaDangKy, soLuongHocPhanDaDangKy, gioiHanTinChi);
                 break;
             case 3:
                 hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy, *soLuongHocPhanDaDangKy);
@@ -186,9 +198,10 @@ int main() {
 
     docHocPhanTuFile("hocphan.txt", dsHocPhan, &soLuongHocPhan);
 
-    char ten[MAX_STRING_LEN], maSV[MAX_STRING_LEN];
+    char ten[MAX_SV], maSV[MAX_SV];
     int luaChon;
     bool hopLe = false;
+    int gioiHanTinChi = 0;
 
     printf("Nhap ten: ");
     scanf(" %[^\n]", ten);
@@ -202,14 +215,17 @@ int main() {
         switch (luaChon) {
             case 1:
                 strcpy(danhSachSinhVien[soLuongSV].he, "Dai tra");
+                gioiHanTinChi = 24;
                 hopLe = true;
                 break;
             case 2:
                 strcpy(danhSachSinhVien[soLuongSV].he, "Elitech");
+                gioiHanTinChi = 28;
                 hopLe = true;
                 break;
             case 3:
                 strcpy(danhSachSinhVien[soLuongSV].he, "SIE");
+                gioiHanTinChi = 28;
                 hopLe = true;
                 break;
             default:
@@ -222,7 +238,7 @@ int main() {
         strcpy(danhSachSinhVien[soLuongSV].maSV, maSV);
         soLuongSV++;
 
-        chuongTrinhDangKyHocPhan(dsHocPhan, soLuongHocPhan, dsHocPhanDaDangKy, &soLuongHocPhanDaDangKy);
+        chuongTrinhDangKyHocPhan(dsHocPhan, soLuongHocPhan, dsHocPhanDaDangKy, &soLuongHocPhanDaDangKy, gioiHanTinChi);
     }
 
     printf("\n");

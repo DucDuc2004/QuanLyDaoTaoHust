@@ -106,6 +106,7 @@ void dangKyHocPhan(HocPhan dsHocPhan[], int soLuongHocPhan, HocPhan dsHocPhanDaD
                 dsHocPhanDaDangKy[*soLuongHocPhanDaDangKy] = dsHocPhan[i];
                 (*soLuongHocPhanDaDangKy)++;
                 printf("Dang ky thanh cong hoc phan: %s cho ca %d ngay thu %d\n", dsHocPhan[i].tenHocPhan, ca, ngay);
+                printf("Tong tin chi da dang ky: %d\n", tinhTongTinChi(dsHocPhanDaDangKy, *soLuongHocPhanDaDangKy));
                 return;
             }
         }
@@ -246,6 +247,6 @@ int main() {
 
     printf("\n");
     hienThiDanhSachHocPhanDaDangKy(dsHocPhanDaDangKy, soLuongHocPhanDaDangKy);
-
+    printf("Tong tin chi da dang ky: %d\n", tinhTongTinChi(dsHocPhanDaDangKy, soLuongHocPhanDaDangKy));
     return 0;
 }

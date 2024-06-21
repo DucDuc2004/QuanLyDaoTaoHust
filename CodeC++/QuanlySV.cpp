@@ -194,7 +194,7 @@ void hienThiDanhSachHocPhanDaDangKy(const std::vector<HocPhan> &dsHocPhanDaDangK
         return;
     }
 
-    const char* thu[] = {"", "", "Thu 2", "Thu 3", "Thu 4", "Thu 5", "Thu 6"};
+    const char* thu[] = {"","", "Thu 2", "Thu 3", "Thu 4", "Thu 5", "Thu 6"};
 
     std::cout << "Danh sach cac hoc phan da dang ky:" << std::endl;
     std::cout << std::setw(150) << std::setfill('-') << "" << std::endl;
@@ -309,13 +309,15 @@ void dangKyTaiKhoan(std::vector<TaiKhoan> &danhSachTaiKhoan) {
     std::string maSV, matKhau, ten, he;
     int heLuaChon;
 
-    std::cout << "Nhap ho va ten: ";
-    std::getline(std::cin, ten);
+    
     std::cout << "Nhap ma sinh vien: ";
     std::cin >> maSV;
     std::cout << "Nhap mat khau: ";
     std::cin >> matKhau;
     std::cin.ignore();
+    std::cout << "Nhap ho va ten: ";
+    std::getline(std::cin, ten);
+    
     
     do {
         std::cout << "Chon he dao tao (1: Dai tra, 2: Elitech, 3: SIE): ";

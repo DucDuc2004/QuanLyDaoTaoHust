@@ -389,7 +389,7 @@ int main() {
     int luaChon;
     bool dangNhapThanhCong = false;
 
-    cout << "\n                     QUAN LY DAO TAO HUST\n" << endl;
+    cout << "\n----QUAN LY DAO TAO HUST----\n" << endl;
 
     do {
         cout << "1. Dang ky tai khoan" << endl;

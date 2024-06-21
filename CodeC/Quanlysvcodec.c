@@ -21,6 +21,7 @@ typedef struct {
     bool lichHoc[5][6];
 } HocPhan;
 
+// Doc file data HocPhan gom 
 void docHocPhanTuFile(const char *tenFile, HocPhan dsHocPhan[], int *soLuongHocPhan) {
     FILE *file = fopen(tenFile, "r");
 
